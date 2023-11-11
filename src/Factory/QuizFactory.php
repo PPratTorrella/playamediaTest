@@ -3,7 +3,7 @@
 namespace App\Factory;
 
 use App\Interface\QuizInterface;
-use App\Service\Quiz\BalancedParenthesisQuiz;
+use App\Service\Quiz\BalancedParenthesesQuiz;
 use App\Service\Quiz\UniquePermutationQuiz;
 
 class QuizFactory
@@ -14,7 +14,7 @@ class QuizFactory
 
 	private array $lazyLoadedQuizes; // services.yaml used for lazy loading configuration
 
-	public function __construct(BalancedParenthesisQuiz $balancedParenthesisQuiz, UniquePermutationQuiz $uniquePermutationsQuiz)
+	public function __construct(BalancedParenthesesQuiz $balancedParenthesisQuiz, UniquePermutationQuiz $uniquePermutationsQuiz)
 	{
 		$this->lazyLoadedQuizes = [
 			self::BALANCED_PARENTHESES => $balancedParenthesisQuiz,

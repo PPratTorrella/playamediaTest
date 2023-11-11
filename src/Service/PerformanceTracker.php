@@ -49,5 +49,20 @@ class PerformanceTracker
 			. 'Peak memory usage new record difference: ' . $this->peakMemoryUsageNewRecordSurplus . ' bytes' . PHP_EOL;
 	}
 
+	public function getExecutionTime(): float
+	{
+		return $this->executionTime;
+	}
+
+	public function getMemoryUsageDiff(): int
+	{
+		return $this->memoryUsageDiff;
+	}
+
+	public function getPeakMemoryUsageNewRecordSurplus(): int
+	{
+		return $this->peakMemoryUsageNewRecordSurplus;
+	}
+
 
 }

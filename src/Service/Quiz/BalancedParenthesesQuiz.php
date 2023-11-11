@@ -4,7 +4,7 @@ namespace App\Service\Quiz;
 
 use App\Interface\QuizInterface;
 
-class BalancedParenthesisQuiz implements QuizInterface
+class BalancedParenthesesQuiz implements QuizInterface
 {
 
 	private const MAPPING = ['(' => ')', '[' => ']', '{' => '}'];

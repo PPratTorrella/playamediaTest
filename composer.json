@@ -23,7 +23,11 @@
         "symfony/yaml": "6.3.*"
     },
     "require-dev": {
-        "symfony/maker-bundle": "*"
+        "phpunit/phpunit": "*",
+        "symfony/browser-kit": "6.3.*",
+        "symfony/css-selector": "6.3.*",
+        "symfony/maker-bundle": "*",
+        "symfony/phpunit-bridge": "*"
     },
     "config": {
         "allow-plugins": {

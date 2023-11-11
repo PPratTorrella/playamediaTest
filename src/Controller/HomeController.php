@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Factory\QuizFactory;
 use App\Service\PerformanceTracker;
-use App\Service\PermutationService;
 use App\Util\StringUtils;
 use App\Validator\PermutationValidator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
