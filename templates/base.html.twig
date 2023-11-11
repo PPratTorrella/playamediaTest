@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <!-- Flash Message Placeholder -->
+    <div id="flashMessage" class="alert d-none" role="alert">
+        <!-- Flash message will go here -->
+    </div>
+
+    {% block content %}
+        <!-- This block will be replaced by child templates extending it -->
+    {% endblock %}
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+{% block scripts %}
+{% endblock %}
+
+</body>
+</html>

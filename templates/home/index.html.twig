@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+	<div class="container mt-5">
+		<h2>Unique Permutations</h2>
+		<form id="inputForm">
+			<div class="form-group">
+				<label for="uniquePermutationsInput">Enter (signed) digits</label>
+				<input type="text" class="form-control" id="uniquePermutationsInput" required>
+				<small class="form-text text-muted">in any format you want... </small>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		<div id="resultHistory" class="mt-4">
+			<h5>Results:</h5> {# could save in a db history table #}
+		</div>
+	</div>
+{% endblock %}
+
+
+{# could move to js file #}
+{% block scripts %}
+
+	<script src="{{ asset('js/script.js') }}"></script>
+
+{% endblock %}
