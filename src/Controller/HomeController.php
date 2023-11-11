@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Factory\QuizFactory;
 use App\Service\PerformanceTracker;
 use App\Service\PermutationService;
 use App\Util\StringUtils;
@@ -17,7 +18,7 @@ class HomeController extends AbstractController
 
 	public function __construct(
 		// lazy loading is used for when controllers and services grow
-		private readonly PermutationService $permutationService,
+		private readonly QuizFactory $quizFactory,
 		private readonly PermutationValidator $validator,
 		private readonly PerformanceTracker $performanceTracker)
 	{
@@ -47,17 +48,46 @@ class HomeController extends AbstractController
 			return $this->json(['error' => $validationError], Response::HTTP_BAD_REQUEST);
 		}
 
+		// could move performance tracking inside the quizes with a Trait or Abstract class if we only want it for Quiz logic
 		$this->performanceTracker->start();
 
-		$permutations = $this->permutationService->getUniquePermutations($digits);
+		$quiz = $this->quizFactory->createQuiz(QuizFactory::UNIQUE_PERMUTATIONS);
+		$permutations = $quiz->answer($digits);
 
 		$this->performanceTracker->stop();
-		$performanceInfo = $this->performanceTracker->getInfo();
 
 		return $this->json([
-			'digitsRecognized' => $digits,
-			'permutations' => $permutations,
-			'performanceInfo' => $performanceInfo,
+			'inputRecognized' => $digits,
+			'performanceInfo' => $this->performanceTracker->getInfo(),
+			'answer' => $permutations,
+			'readableStringAnswer' => StringUtils::toReadableString($permutations)
+		]);
+	}
+
+	/**
+	 * Check if the input string is balanced parenthesis.
+	 *
+	 * @Route("/api/balanced-parentheses", name="api_balanced_parenthesis", methods={"GET"})
+	 */
+	public function getIsBalancedParenthesis(Request $request): JsonResponse
+	{
+		$input = $request->query->get('input');
+
+		// wrong characters are technically not balanced parenthesis, but this is just a test, so I choose ease-of-use for the input
+		$parenthesis = StringUtils::extractParentheses($input);
+
+		$this->performanceTracker->start();
+
+		$quiz = $this->quizFactory->createQuiz(QuizFactory::BALANCED_PARENTHESES);
+		$isBalanced = $quiz->answer($parenthesis);
+
+		$this->performanceTracker->stop();
+
+		return $this->json([
+			'inputRecognized' => $parenthesis,
+			'performanceInfo' => $this->performanceTracker->getInfo(), // to see some memory usage have a lot of opening parenthesis only
+			'answer' => $isBalanced,
+			'readableStringAnswer' => StringUtils::toReadableString($isBalanced),
 		]);
 	}
 

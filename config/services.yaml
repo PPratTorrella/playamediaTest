@@ -30,5 +30,10 @@ services:
     App\Service\PerformanceTracker:
         lazy: true
 
+    App\Service\Quiz\BalancedParenthesisQuiz:
+        lazy: true
+    App\Service\Quiz\UniquePermutationsQuiz:
+        lazy: true
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

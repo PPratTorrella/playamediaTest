@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Quiz;
 
-class PermutationService
+use App\Interface\QuizInterface;
+
+class UniquePermutationQuiz implements QuizInterface
 {
 	/**
 	 * Generate all unique permutations of an array of digits in any order.
 	 *
-	 * @param array $digits Array of digits (can include negative digits).
+	 * @param array $input Array of digits (can include negative digits).
 	 * @return array An array of unique permutations.
 	 */
-	public function getUniquePermutations(array $digits): array
+	public function answer(array $input): array
 	{
 		$uniquePermutations = [];
 
 //		$uniquePermutations = $this->permuteLessSpaceEfficient($digits);
-		$this->permuteBetter($digits, 0, count($digits) - 1, $uniquePermutations);
+		$this->permuteBetter($input, 0, count($input) - 1, $uniquePermutations);
 
 		return $uniquePermutations;
 	}

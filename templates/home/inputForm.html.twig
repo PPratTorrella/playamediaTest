@@ -1,0 +1,19 @@
+{# generic_input_block.twig #}
+
+<div class="container mt-5">
+	<h2> {{ title }} </h2>
+	<form id="{{ input_id }}-form" class="ajax-form" data-ajax-url="{{ ajax_url }}">
+
+		<div class="form-group">
+			<label for="{{ input_id }}">{{ input_label }}</label>
+			<input type="text" class="form-control ajax-data-input" id="{{ input_id }}" required>
+			<small class="form-text text-muted"> in any format you want... </small>
+		</div>
+		<button type="submit" class="btn btn-primary"> Submit </button>
+
+		<div class="resultHistory" class="mt-4">
+			<h5> Results: </h5> {# could save in a db history table #}
+		</div>
+
+	</form>
+</div>

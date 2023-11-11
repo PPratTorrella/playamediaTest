@@ -1,34 +1,35 @@
 $(function() {
-	$('#inputForm').on('submit', function(e) {
+	$('.ajax-form').on('submit', function(e) {
 		e.preventDefault();
-		var uniquePermutations = $('#uniquePermutationsInput').val();
+
+		var $form = $(this);
+		var inputValue= $form.find('.ajax-data-input').val();
+		var ajaxUrl = $form.data('ajax-url');
 
 		$.ajax({
-			url: '/api/unique-permutations',
+			url: ajaxUrl,
 			type: 'GET',
 			contentType: 'application/json',
-			data: { input: uniquePermutations },
+			data: { input: inputValue },
 			success: function(data) {
 				$('#flashMessage').addClass('d-none').text('');
 
-				// no html should be in js could use a template in twig or a better front end framework but job offer is backend, so it will do :)
 				var resultHtml = '<div class="result-item">';
 				resultHtml += '<h5>Input Recognized:</h5>';
-				resultHtml += '<p>' + JSON.stringify(data.digitsRecognized) + '</p>';
+				resultHtml += '<p>' + JSON.stringify(data.inputRecognized) + '</p>';
 				resultHtml += '<h5>Performance Info:</h5>';
 				resultHtml += '<p>' + data.performanceInfo.replace(/\n/g, '<br>') + '</p>';
-				resultHtml += '<h5>Permutations:</h5>';
-				resultHtml += '<p>' + JSON.stringify(data.permutations) + '</p>';
+				resultHtml += '<h5>Answer:</h5>';
+				resultHtml += '<p>' + data.readableStringAnswer + '</p>';
 				resultHtml += '</div>';
 
-				// clear previous result and append the new result or coult show a list of x results
-				$('#resultHistory').html(resultHtml);
+				$form.find('.resultHistory').html(resultHtml);
 			},
 			error: function(error) {
 				$('#flashMessage')
+					.removeClass('d-none')
 					.addClass('alert-danger')
-					.text('Error: ' + error.responseText)
-					.removeClass('d-none');
+					.text('Error: ' + error.responseText);
 			}
 		});
 	});
