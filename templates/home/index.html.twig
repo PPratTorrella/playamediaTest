@@ -5,6 +5,52 @@
 {% block content %}
 	<div class="row">
 
+		<!-- Api call buttons -->
+		<div class="col-12">
+			<div class="button-row">
+
+				<div class="container mt-5">
+					<h2> Example test user query api calls </h2>
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'emailAddress like test_2%',
+						'api_url': path('api_test_users', {'emailAddress__like': 'test_2%'}),
+					} %}
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'userName = test_262_user',
+						'api_url': path('api_test_users', {'userName': 'test_262_user'}),
+					} %}
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'lastLoginAt between 2020-10-20 20:07:33 and 2022-02-15 05:35:29',
+						'api_url': path('api_test_users', {'lastLoginAt__range': '2020-10-20 20:07:33,2022-02-15 05:35:29'}),
+					} %}
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'userType IN (2, 3)',
+						'api_url': path('api_test_users', {'userType__in': '2,3'}),
+					} %}
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'userType greater than 2',
+						'api_url': path('api_test_users', {'userType__gt': '2'}),
+					} %}
+
+					{% include 'home/apiCall.html.twig' with {
+						'title': 'userType IN (2, 3), sort by userName desc, page 2, size 5',
+						'api_url': path('api_test_users', {
+							'userType__in': '2,3',
+							'sort': '-userName',
+							'page': '2',
+							'size': '5',
+						}),
+					} %}
+				</div>
+
+			</div>
+		</div>
+
 		<!-- first quiz -->
 		<div class="col-md-6">
 			{% include 'home/inputForm.html.twig' with {
@@ -28,5 +74,6 @@
 {% endblock %}
 
 {% block scripts %}
-	<script src="{{ asset('js/script.js') }}"></script>
+	<script src="{{ asset('js/quizAjaxCall.js') }}"></script>
+	<script src="{{ asset('js/ApiCall.js') }}"></script>
 {% endblock %}

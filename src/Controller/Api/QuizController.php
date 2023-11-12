@@ -3,7 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Factory\QuizFactory;
-use App\Service\PerformanceTracker;
+use App\Service\PerformanceTrackerService;
 use App\Util\StringUtils;
 use App\Validator\PermutationValidator;
 use OpenApi\Annotations as OA;
@@ -18,11 +18,14 @@ class QuizController extends AbstractController
 
 	public function __construct(
 		// lazy loading is used for when controllers and services grow
-		private readonly QuizFactory $quizFactory,
-		private readonly PermutationValidator $validator,
-		private readonly PerformanceTracker $performanceTracker)
+		private readonly QuizFactory               $quizFactory,
+		private readonly PermutationValidator      $validator,
+		private readonly PerformanceTrackerService $performanceTracker)
 	{
 	}
+
+	// ⚠️ go to /api/doc.json to see the documentation
+	// we could move all api docs to own json files with a little config of nelmio_api_doc.yaml
 
 	/**
 	 * @Route("/api/unique-permutations", name="api_unique_permutations", methods={"GET"})

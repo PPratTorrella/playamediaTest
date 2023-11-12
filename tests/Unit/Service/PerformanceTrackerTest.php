@@ -2,12 +2,12 @@
 
 namespace App\Tests\Unit\Service;
 
-use App\Service\PerformanceTracker;
+use App\Service\PerformanceTrackerService;
 use PHPUnit\Framework\TestCase;
 
 class PerformanceTrackerTest extends TestCase
 {
-	private PerformanceTracker $performanceTracker;
+	private PerformanceTrackerService $performanceTracker;
 
 	/**
 	 * @return float
@@ -23,7 +23,7 @@ class PerformanceTrackerTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->performanceTracker = new PerformanceTracker();
+		$this->performanceTracker = new PerformanceTrackerService();
 	}
 
 	public function testStartAndStop()

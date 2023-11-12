@@ -1,0 +1,3 @@
+
+parameters:
+  api_constants.allowed_special_result_keys: ['sort', 'page', 'size']

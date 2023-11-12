@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: PlayaMedia API
+  version: 1.0.0
+paths:
+  /api/test_users:
+    get:
+      summary: Retrieve a list of test users based on various criteria
+      responses:
+        '200':
+          description: Returns a list of test users matching the specified criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestUser'
+        '400':
+          description: Invalid query parameters
+      parameters:
+        - name: userName
+          in: query
+          description: Username to filter by. Can include an operation like 'username__like'.
+          schema:
+            type: string
+        - name: emailAddress
+          in: query
+          description: Email to filter by. Can include an operation like 'email__like'.
+          schema:
+            type: string
+        - name: isMember
+          in: query
+          description: Filter by membership status. Can include operations like 'isMember__lt' or 'isMember__gt'.
+          schema:
+            type: boolean
+        - name: isActive
+          in: query
+          description: Filter by active status.
+          schema:
+            type: boolean
+        - name: lastLoginAt
+          in: query
+          description: Filter by last login date. Can include operations.
+          schema:
+            type: string
+            format: datetime
+        - name: userType
+          in: query
+          description: Filter by user type. Can include operations.
+          schema:
+            type: integer
+        - name: operations
+          in: query
+          description: Apply operations like '__like', '__lt', '__gt', '__range' to query parameters for advanced filtering.
+          schema:
+            type: string
+            example: userName__like=JohnD%
+components:
+  schemas:
+    TestUser:
+      type: object
+      properties:
+        userName:
+          type: string
+        emailAddress:
+          type: string
+        isMember:
+          type: boolean
+        isActive:
+          type: boolean
+        lastLoginAt:
+          type: string
+          format: datetime
+        userType:
+          type: integer

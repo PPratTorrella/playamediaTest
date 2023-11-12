@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-class PerformanceTracker
+class PerformanceTrackerService
 {
 	private int $startPeakMemoryUsage;
 	private int $startMemory;

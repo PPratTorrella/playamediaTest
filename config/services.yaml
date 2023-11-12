@@ -7,6 +7,9 @@ parameters:
 #    kernel.cache_dir: '/tmp/symfony/cache'  # moved to non-shared folder between my vm and my host machine
 #    kernel.logs_dir: '/tmp/symfony/logs'
 
+imports:
+    - { resource: 'api_constants.yaml' }
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -34,6 +37,18 @@ services:
         lazy: true
     App\Service\Quiz\UniquePermutationsQuiz:
         lazy: true
+
+    App\EventListener\ApiExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    App\Service\TestUserService:
+        arguments:
+            $allowedSpecialResultKeys: '%api_constants.allowed_special_result_keys%'
+
+    App\Repository\TestUserRepository:
+        arguments:
+            $allowedSpecialResultKeys: '%api_constants.allowed_special_result_keys%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

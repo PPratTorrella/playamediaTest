@@ -1,5 +1,6 @@
 nelmio_api_doc:
     documentation:
+#        api_doc_file: /docs/Api/TestUserControllerApiDoc.yaml
         info:
             title: PlayaMedia API
             description: Api documentation
