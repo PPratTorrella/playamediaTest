@@ -12,8 +12,8 @@ class TestUserRepository extends ServiceEntityRepository
 
 	const TABLE_ALIAS = 'u';
 
-	private $allowedSelectFields;
-	private $allowedApiFilterFields;
+	private array $allowedSelectFields = [];
+	private array $allowedApiFilterFields = [];
 
 	/**
 	 * @param ManagerRegistry $registry
@@ -23,12 +23,11 @@ class TestUserRepository extends ServiceEntityRepository
 		parent::__construct($registry, TestUser::class);
 	}
 
-
 	/**
 	 * @param array $criteria
-	 * @return mixed
+	 * @return array returns array of arrays, as we only have a json api its faster
 	 */
-	public function findByCriteria(array $criteria)
+	public function findByCriteria(array $criteria): array
 	{
 		$qb = $this->createQueryBuilder(self::TABLE_ALIAS);
 
@@ -54,7 +53,7 @@ class TestUserRepository extends ServiceEntityRepository
 
 		$this->handlePagination($criteria, $qb);
 
-		return $qb->getQuery()->getResult();
+		return $qb->getQuery()->getArrayResult();
 	}
 
 	/**
@@ -148,12 +147,20 @@ class TestUserRepository extends ServiceEntityRepository
 		$qb->select($selectString);
 	}
 
+	/**
+	 * @param array $allowedSelectFields
+	 * @return $this
+	 */
 	public function setAllowedSelectFields(array $allowedSelectFields): static
 	{
 		$this->allowedSelectFields = $allowedSelectFields;
 		return $this;
 	}
 
+	/**
+	 * @param array $allowedApiFilterFields
+	 * @return $this
+	 */
 	public function setAllowedApiFilterFields(array $allowedApiFilterFields): static
 	{
 		$this->allowedApiFilterFields = $allowedApiFilterFields;

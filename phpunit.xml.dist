@@ -23,5 +23,7 @@
     </testsuites>
 
     <extensions>
+        <!-- composer require <dash><dash> dev dama/doctrine-test-bundle -->
+<!--        <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>--> <!-- for automatically reset db with transactions after each test -->
     </extensions>
 </phpunit>

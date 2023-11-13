@@ -13,7 +13,7 @@
 					<h2> Example test user query api calls </h2>
 
 					{% include 'home/apiCall.html.twig' with {
-						'title': 'emailAddress like test_2%',
+						'title': 'emailAddress like test_2...',
 						'api_url': path('api_test_users', {'emailAddress__like': 'test_2%'}),
 					} %}
 
@@ -28,17 +28,17 @@
 					} %}
 
 					{% include 'home/apiCall.html.twig' with {
-						'title': 'userType IN (2, 3)',
+						'title': 'userType in (2, 3)',
 						'api_url': path('api_test_users', {'userType__in': '2,3'}),
 					} %}
 
 					{% include 'home/apiCall.html.twig' with {
-						'title': 'userType greater than 2',
+						'title': 'userType > 2',
 						'api_url': path('api_test_users', {'userType__gt': '2'}),
 					} %}
 
 					{% include 'home/apiCall.html.twig' with {
-						'title': 'userType IN (2, 3), sort by userName desc, page 2, size 5',
+						'title': 'userType in (2, 3), order by userName desc, page 2, size 5',
 						'api_url': path('api_test_users', {
 							'userType__in': '2,3',
 							'sort': '-userName',

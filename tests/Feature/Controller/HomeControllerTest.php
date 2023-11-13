@@ -12,6 +12,6 @@ class HomeControllerTest extends WebTestCase
 		$client->request('GET', '/');
 
 		$this->assertResponseIsSuccessful();
-		$this->assertSelectorTextContains('h2:first-of-type', 'Unique Permutations', 'should contain Unique Permutations title');
+		$this->assertSelectorTextContains('h2:first-of-type', 'Example test user query api calls', 'should contain first title');
 	}
 }
