@@ -75,7 +75,9 @@ class TestUserController extends AbstractController
 	 *
 	 * // can improve api doc, explain operations better, maybe link to entity schema, explain response better
 	 *
-	 * //@todo implememt error handling and test KO cases in Unit
+	 * For nowe I have generic error handling
+	 * @todo implememt more precise error handling for better feedback
+	 * we can throw more Exceptions in inner functions if we dont mind working with try catching for control, or we can have more safety checks on the way. Both can give us more specific error messages
 	 */
 	public function findUsers(Request $request, TestUserService $service): JsonResponse
 	{
